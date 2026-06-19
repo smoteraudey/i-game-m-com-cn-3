@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://smoteraudey.github.io/i-game-m-com-cn-3/sitemap.xml

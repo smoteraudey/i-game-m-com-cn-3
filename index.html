@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 杂志专题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            background: #f5f3ef;
+            color: #1f1f1f;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ——— 深色头图 ——— */
+        .hero {
+            background: linear-gradient(145deg, #0c0d10 0%, #1b1e26 80%);
+            color: #eae5db;
+            padding: 100px 20px 70px;
+            text-align: center;
+            border-bottom: 1px solid #3a3d45;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(255,215,100,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 400;
+            letter-spacing: 6px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        .hero h1 span {
+            font-weight: 600;
+            color: #f0c27f;
+        }
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #b6ad9c;
+            border-top: 1px solid #3e414b;
+            display: inline-block;
+            padding-top: 18px;
+            margin-top: 6px;
+            letter-spacing: 2px;
+        }
+        .hero .issue-tag {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 6px 22px;
+            border: 1px solid #5b5f6b;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #b9b3a5;
+            letter-spacing: 1px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        /* ——— 背景说明 ——— */
+        .background-note {
+            max-width: 880px;
+            margin: 50px auto 60px;
+            padding: 26px 32px;
+            background: #ffffffef;
+            border-left: 6px solid #c9a86c;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+            font-size: 0.98rem;
+            color: #2f2f2f;
+            border-radius: 0 12px 12px 0;
+        }
+        .background-note strong {
+            color: #8b6f4c;
+        }
+        .background-note p {
+            margin-bottom: 12px;
+        }
+        .background-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ——— 三段自然介绍 ——— */
+        .intro-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin: 60px 0 50px;
+        }
+        .intro-card {
+            flex: 1 1 280px;
+            background: white;
+            padding: 34px 28px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03), 0 10px 30px -10px rgba(0,0,0,0.04);
+            transition: all 0.2s ease;
+        }
+        .intro-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px -8px rgba(0,0,0,0.06);
+        }
+        .intro-card .card-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 8px;
+            color: #b5925a;
+        }
+        .intro-card h3 {
+            font-weight: 500;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #e7e3d9;
+            padding-bottom: 10px;
+            margin-bottom: 16px;
+            color: #1f1f1f;
+        }
+        .intro-card p {
+            font-size: 0.96rem;
+            color: #3c3b38;
+            margin-bottom: 14px;
+        }
+        .intro-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ——— 特点 / 场景（杂志式短句带引用） ——— */
+        .feature-quote {
+            max-width: 820px;
+            margin: 50px auto 30px;
+            background: transparent;
+            padding: 0 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px 40px;
+            justify-content: center;
+        }
+        .feature-item {
+            flex: 0 1 220px;
+            text-align: left;
+            padding: 16px 0 8px;
+            border-bottom: 1px dashed #dad6cc;
+        }
+        .feature-item .num {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #c9a86c;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #3d3b36;
+        }
+
+        /* ——— FAQ 摘要（杂志侧边栏风格） ——— */
+        .faq-mini {
+            background: #f0ede6;
+            padding: 30px 30px 24px;
+            border-radius: 30px;
+            margin: 30px 0 50px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 40px;
+        }
+        .faq-mini .faq-block {
+            flex: 1 1 200px;
+        }
+        .faq-mini h4 {
+            font-weight: 500;
+            font-size: 1rem;
+            color: #3f3629;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        .faq-mini p {
+            font-size: 0.89rem;
+            color: #5d5951;
+        }
+
+        /* ——— 页尾访问提示 ——— */
+        .footer-visit {
+            margin-top: 60px;
+            padding: 48px 20px 40px;
+            border-top: 1px solid #dad4c8;
+            text-align: center;
+            background: #ffffffd3;
+            border-radius: 40px 40px 0 0;
+        }
+        .footer-visit p {
+            max-width: 600px;
+            margin: 0 auto 12px;
+            font-size: 1rem;
+            color: #3d3b36;
+        }
+        .footer-visit a {
+            color: #8b6f4c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #dac29b;
+            transition: border 0.2s, color 0.2s;
+        }
+        .footer-visit a:hover {
+            border-bottom-color: #8b6f4c;
+            color: #4a3c28;
+        }
+        .footer-visit .small-note {
+            font-size: 0.8rem;
+            color: #8b887e;
+            margin-top: 18px;
+        }
+
+        /* ——— 响应式 ——— */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2.2rem;
+                letter-spacing: 3px;
+            }
+            .hero {
+                padding: 70px 16px 50px;
+            }
+            .background-note {
+                padding: 20px 18px;
+            }
+            .intro-card {
+                padding: 26px 20px;
+            }
+            .feature-item {
+                flex: 1 1 160px;
+            }
+            .faq-mini {
+                padding: 20px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 深色头图 -->
+<section class="hero">
+    <h1>MAG·<span>爱游戏</span></h1>
+    <div class="sub">再访 · 收藏 · 持续关注</div>
+    <div class="issue-tag">📂 专题 · 2025 春</div>
+</section>
+
+<div class="wrapper">
+
+    <!-- 背景说明 -->
+    <div class="background-note">
+        <p><strong>为什么再次打开这个页面？</strong> 因为有些内容值得被记住，而不是滑过即忘。<strong>爱游戏</strong> 是一个围绕游戏文化与资讯的站点，它不追逐热点噪音，而是把精力放在更持久的记录和整理上。无论你是偶然回头，还是特意收藏，这里都有一份安静的坐标。</p>
+        <p>从最初的专题到现在的杂志式栏目，<strong>爱游戏</strong> 的结构变得更清晰：每篇内容都带着自己的上下文，方便你随时切入、随时离开，下一次再来时仍能接上。</p>
+    </div>
+
+    <!-- 三段自然介绍 (再次访问、收藏、持续关注) -->
+    <div class="intro-grid">
+        <div class="intro-card">
+            <span class="card-icon">↻</span>
+            <h3>再次访问</h3>
+            <p>互联网上的信息流动很快，但<strong>爱游戏</strong> 的页面保持相对稳定的更新节奏。你不需要每天刷新，每隔一段时间回来，就能看到几篇经过整理的内容。没有突变的推送，只有你主动选择的阅读。</p>
+            <p>如果你之前来过，会发现导航和分类几乎没变——这是刻意为之，为了降低“重新熟悉”的成本。熟悉的布局，新的文字，仅此而已。</p>
+        </div>
+        <div class="intro-card">
+            <span class="card-icon">✦</span>
+            <h3>适合收藏</h3>
+            <p>当你把某个页面加入书签，是希望它在未来仍有用。这个站点的内容大多围绕具体游戏、设计思路或行业观察，时效性压力比较小。哪怕过了一两年，那些关于关卡设计或像素美术的讨论，依然能提供参照。</p>
+            <p>收藏 <strong>爱游戏</strong> 的意义，不只是存一个链接，更是存一个可以反复查阅的角落。</p>
+        </div>
+        <div class="intro-card">
+            <span class="card-icon">◉</span>
+            <h3>持续关注</h3>
+            <p>关注不代表每天都要看。你可以在觉得合适的时候，点开书签或输入网址。没有邮件推送，也没有弹窗提醒。内容会慢慢增加，像一本不定期出版的杂志。</p>
+            <p>如果你愿意，隔几周回来翻一翻，也许会发现某个新专题正好切中你最近的想法——这种不期而遇，比算法推荐更接近阅读的本意。</p>
+        </div>
+    </div>
+
+    <!-- 特点 / 场景 短句 -->
+    <div class="feature-quote">
+        <div class="feature-item">
+            <span class="num">01</span>
+            <p>专题文章按主题整理，不是按日期堆叠。</p>
+        </div>
+        <div class="feature-item">
+            <span class="num">02</span>
+            <p>每个页面都保留清晰的上下文，适合中途加入。</p>
+        </div>
+        <div class="feature-item">
+            <span class="num">03</span>
+            <p>没有自动播放的视频或广告干扰阅读。</p>
+        </div>
+        <div class="feature-item">
+            <span class="num">04</span>
+            <p>引用来源与参考链接都会标注，便于延伸。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要（杂志侧边栏） -->
+    <div class="faq-mini">
+        <div class="faq-block">
+            <h4>内容多久更新一次？</h4>
+            <p>不固定，通常每月有 2–4 篇新内容。偶尔集中更新，偶尔沉寂一两周。没有时间表，但不会长期停滞。</p>
+        </div>
+        <div class="faq-block">
+            <h4>可以转载或引用吗？</h4>
+            <p>非商业引用请注明出处。转载前建议先浏览站内关于版权的说明页面。</p>
+        </div>
+        <div class="faq-block">
+            <h4>为什么叫“爱游戏”？</h4>
+            <p>因为所有内容都围绕对游戏的兴趣展开——不是评测机构，也不是资讯聚合，更像一个私人编辑的读物。</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- 页尾访问提示 -->
+<div class="footer-visit">
+    <p>
+        如果你对游戏文化、设计或独立作品有兴趣，不妨把 
+        <a href="https://i-game-m.com.cn">爱游戏</a> 
+        加入书签栏。它不急着让你留下，但随时欢迎你回来。
+    </p>
+    <p class="small-note">—— 杂志专题 · 第零期 ——</p>
+</div>
+
+</body>
+</html>
