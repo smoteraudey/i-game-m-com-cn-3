@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V体育 · 信息卡片页</title>
+  <style>
+    /* 基础重置 & 浅灰背景 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f4f5f7;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e2a3a;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 主视觉卡片（hero） */
+    .hero-card {
+      background: linear-gradient(145deg, #ffffff, #f9fafc);
+      border: 1px solid #e2e6ee;
+      border-radius: 32px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.02);
+      padding: 3rem 2.5rem;
+      margin-bottom: 2.5rem;
+      transition: box-shadow 0.2s ease;
+    }
+    .hero-card:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #0d1c2b;
+      margin-bottom: 0.75rem;
+    }
+    .hero-title span {
+      display: inline-block;
+      background: #eef2f7;
+      padding: 0.1rem 0.6rem;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #3a4c62;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+      border: 1px solid #dbe0e8;
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      color: #3f526a;
+      max-width: 680px;
+      margin-top: 0.5rem;
+      border-left: 4px solid #b0c4db;
+      padding-left: 1.2rem;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+    .info-card {
+      background: #ffffff;
+      border: 1px solid #e4e8f0;
+      border-radius: 24px;
+      padding: 1.8rem 1.8rem 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+      border-color: #cdd5e1;
+    }
+    .card-icon {
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+      background: #f0f3f8;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      border: 1px solid #dee5ef;
+    }
+    .info-card h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: #13212f;
+    }
+    .info-card p {
+      color: #2f4055;
+      font-size: 0.98rem;
+      margin-bottom: 0.5rem;
+    }
+    .info-card ul {
+      list-style: none;
+      margin-top: 0.6rem;
+    }
+    .info-card li {
+      position: relative;
+      padding-left: 1.1rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+      color: #2f4055;
+    }
+    .info-card li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #6a7f9b;
+    }
+
+    /* 自然链接段落卡片 */
+    .link-section-card {
+      background: #ffffff;
+      border: 1px solid #e4e8f0;
+      border-radius: 24px;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      margin-bottom: 2.5rem;
+    }
+    .link-section-card p {
+      font-size: 1.05rem;
+      color: #1f3143;
+      max-width: 800px;
+      margin-bottom: 0.6rem;
+    }
+    .link-section-card a {
+      color: #1f4a7a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.15s, background 0.1s;
+      padding: 0 2px;
+    }
+    .link-section-card a:hover {
+      border-bottom-color: #1f4a7a;
+      background: #eef4fa;
+      border-radius: 4px;
+    }
+
+    /* 适合人群 / 场景组合卡片 */
+    .scenario-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .scenario-item {
+      flex: 1 1 200px;
+      background: #ffffff;
+      border: 1px solid #e4e8f0;
+      border-radius: 20px;
+      padding: 1.5rem 1.5rem 1.7rem;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.02);
+    }
+    .scenario-item h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .scenario-item p {
+      font-size: 0.95rem;
+      color: #2c4057;
+    }
+
+    /* 提示 / 摘要小卡片 */
+    .faq-note {
+      background: #f0f3f9;
+      border: 1px solid #dce2ec;
+      border-radius: 18px;
+      padding: 1.5rem 2rem;
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .faq-note p {
+      font-size: 0.96rem;
+      color: #1f3143;
+      margin-bottom: 0.3rem;
+    }
+    .faq-note strong {
+      color: #0a1b2b;
+      font-weight: 600;
+    }
+
+    /* 响应式细节 */
+    @media (max-width: 680px) {
+      body {
+        padding: 1.2rem 0.8rem;
+      }
+      .hero-card {
+        padding: 2rem 1.5rem;
+      }
+      .hero-title {
+        font-size: 1.9rem;
+      }
+      .hero-sub {
+        font-size: 1rem;
+        padding-left: 1rem;
+      }
+      .card-grid {
+        gap: 1.2rem;
+      }
+      .info-card {
+        padding: 1.5rem;
+      }
+      .link-section-card {
+        padding: 1.5rem;
+      }
+      .scenario-item {
+        flex: 1 1 100%;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-card {
+        padding: 1.6rem 1.2rem;
+        border-radius: 24px;
+      }
+      .hero-title span {
+        display: block;
+        margin-left: 0;
+        margin-top: 0.4rem;
+        width: fit-content;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 主视觉卡片 -->
+  <div class="hero-card">
+    <h1 class="hero-title">
+      V体育 <span>信息卡片</span>
+    </h1>
+    <div class="hero-sub">
+      围绕体育资讯与内容聚合，整理出用途、适用人群与常见关注点。
+    </div>
+  </div>
+
+  <!-- 用途卡片（3张） -->
+  <div class="card-grid">
+    <div class="info-card">
+      <div class="card-icon">📋</div>
+      <h3>内容索引</h3>
+      <p>V体育 汇集了多个运动项目的资讯、赛事摘要与动态更新，方便日常浏览。</p>
+      <ul>
+        <li>热门赛事速览</li>
+        <li>球队与选手动态</li>
+        <li>赛后数据简讯</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <div class="card-icon">🧭</div>
+      <h3>信息导航</h3>
+      <p>按运动类别、联赛或时间线整理内容，减少信息过载，帮助快速定位。</p>
+      <ul>
+        <li>分类标签筛选</li>
+        <li>关键词搜索</li>
+        <li>整合专题回顾</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <div class="card-icon">📎</div>
+      <h3>轻量阅读</h3>
+      <p>页面结构以短段落、分级标题和卡片为主，适合碎片时间浏览。</p>
+      <ul>
+        <li>移动端适配</li>
+        <li>低干扰排版</li>
+        <li>内容层级清晰</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 自然链接段落卡片（嵌入关键链接） -->
+  <div class="link-section-card">
+    <p>
+      如果你对体育内容聚合和日常资讯整理感兴趣，<a href="https://home-vty.com">V体育</a> 提供了一种结构化的浏览方式。
+      页面以信息卡片和分类标签组织内容，覆盖足球、篮球、网球等项目的基本动态。
+    </p>
+    <p>
+      对于希望快速获取赛事摘要或队伍近况的使用者，<a href="https://home-vty.com">V体育</a> 的内容更新节奏较为稳定，
+      且不包含过度营销或诱导性表述，适合作为日常信息源之一。
+    </p>
+  </div>
+
+  <!-- 适合人群 + 场景组合 -->
+  <div class="scenario-group">
+    <div class="scenario-item">
+      <h4>🏃 运动爱好者</h4>
+      <p>日常关注多项目动态，希望在一个页面内浏览多个联赛的摘要与新闻。</p>
+    </div>
+    <div class="scenario-item">
+      <h4>📊 数据倾向用户</h4>
+      <p>偏好简洁的赛事结果、积分变化和关键数据，而非长篇分析文章。</p>
+    </div>
+    <div class="scenario-item">
+      <h4>📱 移动端阅读者</h4>
+      <p>经常在手机或平板上浏览信息，对页面加载和排版适配有要求。</p>
+    </div>
+    <div class="scenario-item">
+      <h4>⏳ 碎片时间用户</h4>
+      <p>利用通勤或间歇时间快速浏览体育动态，不需要复杂交互或社区功能。</p>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 / 提示卡片 -->
+  <div class="faq-note">
+    <p><strong>常见关注点：</strong> V体育 的内容是否涵盖小众运动？—— 主要以足球、篮球、网球等主流项目为主，部分内容会延伸至格斗、赛车等赛事，但覆盖面以常见联赛优先。</p>
+    <p><strong>更新频率：</strong> 通常每日有数次内容刷新，重大赛事期间更新间隔更短。页面本身不提供直播或实时比分，侧重赛后和动态汇总。</p>
+    <p><strong>使用建议：</strong> 适合作为信息补充来源，结合其他深度报道或数据平台一起使用效果更佳。</p>
+  </div>
+
+  <!-- 尾部注释（极小字号，仅作页脚感觉） -->
+  <div style="margin-top: 2.5rem; font-size: 0.75rem; color: #6b7e95; text-align: center; border-top: 1px solid #e2e7ef; padding-top: 1.5rem;">
+    内容汇总页 · 仅作信息展示
+  </div>
+
+</div>
+</body>
+</html>
